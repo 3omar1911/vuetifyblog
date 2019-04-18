@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app id="inspire">
+    <blog-nav :drawer="drawer"></blog-nav>
+    <v-toolbar color="indigo" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Blog</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout
+          justify-center
+          align-center
+        >
+          <v-flex text-xs-center>
+            <router-view></router-view>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import BlogNav from './components/layouts/Navbar.vue';
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  export default {
+    components: {
+      'blog-nav': BlogNav
+    },
+    data: () => ({
+      drawer: null
+    }),
+    props: {
+      source: String
+    },
+    
   }
-}
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
